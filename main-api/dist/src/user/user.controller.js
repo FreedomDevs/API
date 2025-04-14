@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const responses_1 = require("./responses");
 const decorators_1 = require("../../libs/common/src/decorators");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const path_1 = require("path");
 let UserController = class UserController {
     constructor(userService) {
         this.userService = userService;
@@ -42,7 +45,7 @@ let UserController = class UserController {
         const profile = await this.userService.getMe(token);
         return new responses_1.UserResponse(profile);
     }
-    async validToken(token) {
+    validToken(token) {
         if (!token) {
             throw new Error('Authorization token is missing');
         }
@@ -54,6 +57,14 @@ let UserController = class UserController {
     async deleteUser(id, uIDS) {
         const user = await this.userService.delete(id, uIDS);
         return new responses_1.UserResponse(user);
+    }
+    async uploadAvatar(file, user) {
+        if (!file) {
+            throw new Error('No file uploaded');
+        }
+        const avatarUrl = `/${file.filename}`;
+        const updated = await this.userService.updateAvatar(user.id, avatarUrl);
+        return new responses_1.UserResponse(updated);
     }
 };
 exports.UserController = UserController;
@@ -95,7 +106,7 @@ __decorate([
     __param(0, (0, common_1.Headers)('Authorization')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UserController.prototype, "validToken", null);
 __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
@@ -106,6 +117,25 @@ __decorate([
     __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "deleteUser", null);
+__decorate([
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads/',
+            filename: (req, file, callback) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const ext = (0, path_1.extname)(file.originalname);
+                const filename = `${uniqueSuffix}${ext}`;
+                callback(null, filename);
+            },
+        }),
+    })),
+    (0, common_1.Post)('upload/avatar'),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, decorators_1.CurrentUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "uploadAvatar", null);
 exports.UserController = UserController = __decorate([
     (0, common_1.Controller)('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])

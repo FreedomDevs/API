@@ -18,14 +18,14 @@ let GameDownloadService = class GameDownloadService {
         const stats = (0, fs_1.statSync)(this.FILE_PATH);
         return {
             size: stats.size,
-            lastModified: stats.mtime
+            lastModified: stats.mtime,
         };
     }
     createFileStream(start, end) {
         return (0, fs_1.createReadStream)(this.FILE_PATH, {
             start,
             end,
-            highWaterMark: 1024 * 1024
+            highWaterMark: 1024 * 1024,
         });
     }
     logDownloadSpeed(startTime, bytesSent) {

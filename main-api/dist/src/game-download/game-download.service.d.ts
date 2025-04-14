@@ -1,4 +1,4 @@
-import { IFileInfo } from "./file-info.interface";
+import { IFileInfo } from './file-info.interface';
 export declare class GameDownloadService {
     private readonly FILE_PATH;
     getFileInfo(): IFileInfo;

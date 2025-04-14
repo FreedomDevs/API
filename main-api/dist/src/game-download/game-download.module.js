@@ -16,7 +16,7 @@ exports.GameDownloadModule = GameDownloadModule;
 exports.GameDownloadModule = GameDownloadModule = __decorate([
     (0, common_1.Module)({
         controllers: [game_download_controller_1.GameDownloadController],
-        providers: [game_download_service_1.GameDownloadService]
+        providers: [game_download_service_1.GameDownloadService],
     })
 ], GameDownloadModule);
 //# sourceMappingURL=game-download.module.js.map

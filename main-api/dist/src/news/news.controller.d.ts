@@ -1,5 +1,5 @@
-import { NewsService } from "./news.service";
-import { CreateNewsDto } from "./dto";
+import { NewsService } from './news.service';
+import { CreateNewsDto } from './dto';
 export declare class NewsController {
     private readonly newsService;
     constructor(newsService: NewsService);

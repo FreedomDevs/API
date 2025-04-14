@@ -4,6 +4,6 @@ import { GameDownloadService } from './game-download.service';
 
 @Module({
   controllers: [GameDownloadController],
-  providers: [GameDownloadService]
+  providers: [GameDownloadService],
 })
 export class GameDownloadModule {}

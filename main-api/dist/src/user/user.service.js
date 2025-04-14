@@ -30,15 +30,19 @@ let UserService = class UserService {
                 email: user.email,
                 name: user.name,
                 password: hashedPassword,
-                roles: ["USER"],
-            }
+                roles: ['USER'],
+            },
         });
     }
     findOne(idEmailOrName) {
         return this.prisma.user.findFirst({
             where: {
-                OR: [{ email: idEmailOrName }, { name: idEmailOrName }, { id: idEmailOrName }],
-            }
+                OR: [
+                    { email: idEmailOrName },
+                    { name: idEmailOrName },
+                    { id: idEmailOrName },
+                ],
+            },
         });
     }
     getAllUsers() {
@@ -54,11 +58,11 @@ let UserService = class UserService {
         try {
             const tokenData = this.jwtService.verify(token);
             if (tokenData) {
-                return { "isValid": true };
+                return { isValid: true };
             }
         }
         catch (e) {
-            return { "isValid": false };
+            return { isValid: false };
         }
     }
     delete(id, user) {
@@ -73,10 +77,17 @@ let UserService = class UserService {
     hashPassword(password) {
         return (0, bcrypt_1.hashSync)(password, (0, bcrypt_1.genSaltSync)(10));
     }
+    async updateAvatar(userId, avatarUrl) {
+        return this.prisma.user.update({
+            where: { id: userId },
+            data: { avatar: avatarUrl },
+        });
+    }
 };
 exports.UserService = UserService;
 exports.UserService = UserService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService, jwt_1.JwtService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        jwt_1.JwtService])
 ], UserService);
 //# sourceMappingURL=user.service.js.map

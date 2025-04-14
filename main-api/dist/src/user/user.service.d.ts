@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
-import { PrismaService } from "@prisma/prisma.service";
-import { JwtService } from "@nestjs/jwt";
-import { IJwtPayload } from "@auth/interfaces";
+import { PrismaService } from '@prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
+import { IJwtPayload } from '@auth/interfaces';
 export declare class UserService {
     private readonly prisma;
     private readonly jwtService;
@@ -12,6 +12,7 @@ export declare class UserService {
         roles: import(".prisma/client").$Enums.Roles[];
         email: string;
         password: string;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
@@ -21,6 +22,7 @@ export declare class UserService {
         roles: import(".prisma/client").$Enums.Roles[];
         email: string;
         password: string;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
@@ -30,6 +32,7 @@ export declare class UserService {
         roles: import(".prisma/client").$Enums.Roles[];
         email: string;
         password: string;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     }[]>;
@@ -39,6 +42,7 @@ export declare class UserService {
         roles: import(".prisma/client").$Enums.Roles[];
         email: string;
         password: string;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     } | null, null, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
@@ -51,9 +55,20 @@ export declare class UserService {
         roles: import(".prisma/client").$Enums.Roles[];
         email: string;
         password: string;
+        avatar: string | null;
         createdAt: Date;
         updatedAt: Date;
     }, never, import("@prisma/client/runtime/library").DefaultArgs, import(".prisma/client").Prisma.PrismaClientOptions>;
     private getAll;
     private hashPassword;
+    updateAvatar(userId: string, avatarUrl: string): Promise<{
+        id: string;
+        name: string;
+        roles: import(".prisma/client").$Enums.Roles[];
+        email: string;
+        password: string;
+        avatar: string | null;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
 }

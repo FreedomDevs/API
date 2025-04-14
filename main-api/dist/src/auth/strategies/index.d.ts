@@ -1,2 +1,2 @@
-import { JwtStrategy } from "./jwt.strategy";
+import { JwtStrategy } from './jwt.strategy';
 export declare const STRATEGIES: (typeof JwtStrategy)[];

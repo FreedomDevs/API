@@ -1,20 +1,20 @@
-import {User, Roles} from "@prisma/client";
-import {Exclude} from "class-transformer";
+import { User, Roles } from '@prisma/client';
+import { Exclude } from 'class-transformer';
 
 export class UserResponse implements User {
-    id: string;
-    name: string;
-    email: string;
+  id: string;
+  name: string;
+  email: string;
 
-    @Exclude()
-    password: string;
+  @Exclude()
+  password: string;
 
-    createdAt: Date;
+  createdAt: Date;
+  updatedAt: Date;
+  roles: Roles[];
+  avatar: string | null;
 
-    updatedAt: Date;
-    roles: Roles[];
-
-    constructor(user: User) {
-        Object.assign(this, user)
-    }
+  constructor(user: User) {
+    Object.assign(this, user);
+  }
 }

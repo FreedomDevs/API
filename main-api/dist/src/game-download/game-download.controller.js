@@ -23,16 +23,16 @@ let GameDownloadController = class GameDownloadController {
     async downloadGame(range, res) {
         const fileInfo = this.gameDownloadService.getFileInfo();
         if (range) {
-            const parts = range.replace(/bytes=/, "").split("-");
+            const parts = range.replace(/bytes=/, '').split('-');
             const start = parseInt(parts[0], 10);
             const end = parts[1] ? parseInt(parts[1], 10) : fileInfo.size - 1;
             res.status(206);
             res.set({
                 'Content-Range': `bytes ${start}-${end}/${fileInfo.size}`,
                 'Accept-Ranges': 'bytes',
-                'Content-Length': (end - start + 1),
+                'Content-Length': end - start + 1,
                 'Content-Type': 'application/zip',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
             });
             this.gameDownloadService.createFileStream(start, end).pipe(res);
         }
@@ -41,7 +41,7 @@ let GameDownloadController = class GameDownloadController {
             res.set({
                 'Content-Length': fileInfo.size,
                 'Content-Type': 'application/zip',
-                'Cache-Control': 'no-cache'
+                'Cache-Control': 'no-cache',
             });
             this.gameDownloadService.createFileStream().pipe(res);
         }

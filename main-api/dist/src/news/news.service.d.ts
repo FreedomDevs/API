@@ -1,5 +1,5 @@
-import { PrismaService } from "@prisma/prisma.service";
-import { CreateNewsDto, UpdateNewsDto } from "./dto";
+import { PrismaService } from '@prisma/prisma.service';
+import { CreateNewsDto, UpdateNewsDto } from './dto';
 export declare class NewsService {
     private readonly prisma;
     constructor(prisma: PrismaService);

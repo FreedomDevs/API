@@ -1,4 +1,4 @@
 export interface IFileInfo {
-    size: number;
-    lastModified: Date;
+  size: number;
+  lastModified: Date;
 }

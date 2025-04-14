@@ -1,9 +1,9 @@
 export interface IToken {
-    accessToken: string;
+  accessToken: string;
 }
 
 export interface IJwtPayload {
-    id: string;
-    name: string;
-    roles: string[];
+  id: string;
+  name: string;
+  roles: string[];
 }

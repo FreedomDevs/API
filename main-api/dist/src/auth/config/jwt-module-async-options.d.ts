@@ -1,2 +1,2 @@
-import { JwtModuleAsyncOptions } from "@nestjs/jwt";
+import { JwtModuleAsyncOptions } from '@nestjs/jwt';
 export declare const options: () => JwtModuleAsyncOptions;

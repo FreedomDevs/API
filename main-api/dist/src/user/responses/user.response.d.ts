@@ -1,4 +1,4 @@
-import { User, Roles } from "@prisma/client";
+import { User, Roles } from '@prisma/client';
 export declare class UserResponse implements User {
     id: string;
     name: string;
@@ -7,5 +7,6 @@ export declare class UserResponse implements User {
     createdAt: Date;
     updatedAt: Date;
     roles: Roles[];
+    avatar: string | null;
     constructor(user: User);
 }

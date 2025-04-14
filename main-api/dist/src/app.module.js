@@ -16,18 +16,29 @@ const jwt_auth_guard_1 = require("./auth/guards/jwt-auth.guard");
 const core_1 = require("@nestjs/core");
 const news_module_1 = require("./news/news.module");
 const game_download_module_1 = require("./game-download/game-download.module");
+const images_controller_1 = require("./images/images.controller");
+const images_module_1 = require("./images/images.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, prisma_module_1.PrismaModule, auth_module_1.AuthModule, config_1.ConfigModule.forRoot({ isGlobal: true }), news_module_1.NewsModule, game_download_module_1.GameDownloadModule],
+        imports: [
+            user_module_1.UserModule,
+            prisma_module_1.PrismaModule,
+            auth_module_1.AuthModule,
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            news_module_1.NewsModule,
+            game_download_module_1.GameDownloadModule,
+            images_module_1.ImagesModule,
+        ],
         providers: [
             {
                 provide: core_1.APP_GUARD,
                 useClass: jwt_auth_guard_1.JwtAuthGuard,
             },
         ],
+        controllers: [images_controller_1.ImagesController],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

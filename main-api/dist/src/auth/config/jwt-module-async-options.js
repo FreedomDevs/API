@@ -6,7 +6,7 @@ const JwtModuleOptions = (config) => ({
     secret: config.get('JWT_SECRET'),
     signOptions: {
         expiresIn: config.get('JWT_EXP', '60m'),
-    }
+    },
 });
 const options = () => ({
     inject: [config_1.ConfigService],

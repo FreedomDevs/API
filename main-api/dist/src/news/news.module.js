@@ -17,7 +17,7 @@ exports.NewsModule = NewsModule;
 exports.NewsModule = NewsModule = __decorate([
     (0, common_1.Module)({
         providers: [news_service_1.NewsService, prisma_service_1.PrismaService],
-        controllers: [news_controller_1.NewsController]
+        controllers: [news_controller_1.NewsController],
     })
 ], NewsModule);
 //# sourceMappingURL=news.module.js.map

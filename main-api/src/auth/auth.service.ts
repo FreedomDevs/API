@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger, UnauthorizedException, } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto';
 import { UserService } from '@user/user.service';
 import { IToken } from './interfaces';
@@ -51,12 +56,11 @@ export class AuthService {
       throw new UnauthorizedException('Не верный логин или пароль');
     }
 
-    const accessToken =
-      this.jwtService.sign({
-        id: user.id,
-        name: user.name,
-        roles: user.roles,
-      });
+    const accessToken = this.jwtService.sign({
+      id: user.id,
+      name: user.name,
+      roles: user.roles,
+    });
 
     return { accessToken };
   }
