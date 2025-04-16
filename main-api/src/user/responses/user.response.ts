@@ -2,19 +2,22 @@ import { User, Roles } from '@prisma/client';
 import { Exclude } from 'class-transformer';
 
 export class UserResponse implements User {
-  id: string;
-  name: string;
-  email: string;
+  id: string
+  name: string
+  email: string
 
   @Exclude()
-  password: string;
+  password: string
 
-  createdAt: Date;
-  updatedAt: Date;
-  roles: Roles[];
-  avatar: string | null;
+  createdAt: Date
+  updatedAt: Date
+  roles: Roles[]
+  avatar: string | null
+
+  skinUrl: string | null
+  skinType: boolean
 
   constructor(user: User) {
-    Object.assign(this, user);
+    Object.assign(this, user)
   }
 }

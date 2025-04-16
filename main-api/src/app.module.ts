@@ -9,6 +9,7 @@ import { NewsModule } from './news/news.module';
 import { GameDownloadModule } from './game-download/game-download.module';
 import { ImagesController } from './images/images.controller';
 import { ImagesModule } from './images/images.module';
+import { SkinsModule } from './skins/skins.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ImagesModule } from './images/images.module';
     NewsModule,
     GameDownloadModule,
     ImagesModule,
+    SkinsModule,
   ],
   providers: [
     {

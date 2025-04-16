@@ -1,11 +1,11 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common'
 
-import { Roles, User } from '@prisma/client';
-import { PrismaService } from '@prisma/prisma.service';
-import { genSaltSync, hashSync } from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
-import { IJwtPayload } from '@auth/interfaces';
-
+import { Roles, User } from '@prisma/client'
+import { PrismaService } from '@prisma/prisma.service'
+import { genSaltSync, hashSync } from 'bcrypt'
+import { JwtService } from '@nestjs/jwt'
+import { IJwtPayload } from '@auth/interfaces'
+/* eslint-disable */
 @Injectable()
 export class UserService {
   constructor(
@@ -15,10 +15,10 @@ export class UserService {
 
   save(user: Partial<User>) {
     if (!user.email || !user.name || !user.password) {
-      throw new Error('Missing required fields: email, name, or password');
+      throw new Error('Missing required fields: email, name, or password')
     }
 
-    const hashedPassword = this.hashPassword(user.password);
+    const hashedPassword = this.hashPassword(user.password)
     return this.prisma.user.create({
       data: {
         email: user.email,
@@ -26,7 +26,7 @@ export class UserService {
         password: hashedPassword,
         roles: ['USER'],
       },
-    });
+    })
   }
 
   findOne(idEmailOrName: string) {
@@ -35,59 +35,55 @@ export class UserService {
     // }
     return this.prisma.user.findFirst({
       where: {
-        OR: [
-          { email: idEmailOrName },
-          { name: idEmailOrName },
-          { id: idEmailOrName },
-        ],
+        OR: [{ email: idEmailOrName }, { name: idEmailOrName }, { id: idEmailOrName }],
       },
-    });
+    })
   }
 
   getAllUsers() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany()
   }
 
   getMe(token: string) {
-    const tokenData = this.jwtService.verify(token);
-    const { id } = tokenData;
-    const profileData = this.findOne(id);
-    return profileData;
+    const tokenData = this.jwtService.verify(token)
+    const { id } = tokenData
+    const profileData = this.findOne(id)
+    return profileData
   }
 
   validToken(token: string) {
     try {
-      const tokenData = this.jwtService.verify(token);
+      const tokenData = this.jwtService.verify(token)
 
       if (tokenData) {
-        return { isValid: true };
+        return { isValid: true }
       }
     } catch (e) {
       // Если произошла ошибка верификации, токен невалиден
-      return { isValid: false };
+      return { isValid: false }
     }
   }
 
   delete(id: string, user: IJwtPayload) {
     if (user.id !== id && !user.roles.includes(Roles.ADMIN)) {
-      throw new ForbiddenException();
+      throw new ForbiddenException()
     }
 
-    return this.prisma.user.delete({ where: { id: id } });
+    return this.prisma.user.delete({ where: { id: id } })
   }
 
   private getAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany()
   }
 
   private hashPassword(password: string): string {
-    return hashSync(password, genSaltSync(10));
+    return hashSync(password, genSaltSync(10))
   }
 
   async updateAvatar(userId: string, avatarUrl: string) {
     return this.prisma.user.update({
       where: { id: userId },
       data: { avatar: avatarUrl },
-    });
+    })
   }
 }
