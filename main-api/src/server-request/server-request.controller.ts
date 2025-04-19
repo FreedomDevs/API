@@ -23,4 +23,11 @@ export class ServerRequestController {
 
     return this.userService.validToken(dto.token)
   }
+
+  @Get('health')
+  health() {
+    return {
+      online: true,
+    }
+  }
 }
