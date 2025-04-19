@@ -10,8 +10,7 @@ import { GameDownloadModule } from './game-download/game-download.module'
 import { ImagesController } from './images/images.controller'
 import { ImagesModule } from './images/images.module'
 import { SkinsModule } from './skins/skins.module'
-import { ServerRequestService } from './server-request/server-request.service';
-import { ServerRequestModule } from './server-request/server-request.module';
+import { ServerRequestModule } from './server-request/server-request.module'
 
 @Module({
   imports: [
@@ -30,7 +29,6 @@ import { ServerRequestModule } from './server-request/server-request.module';
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
-    ServerRequestService,
   ],
   controllers: [ImagesController],
 })
